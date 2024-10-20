@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Askme</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    {% load static %}
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+                <a class="navbar-brand fs-2" href="/askme/">Ask Pupkin</a>
+
+
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <a href="/ask/">
+                        <button class="btn btn-success" type="button">Ask!</button>
+                    </a>
+
+
+                </form>
+
+                <div class="d-flex gap-1">
+                    <div>
+                        <a class="m-3" href="/login/">log in</a>
+                        <a href="/signup/">register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-3">
+        <div class="d-flex gap-3 align-items-center">
+            <h1>Log in</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-9">
+                <div class="d-flex flex-column gap-3">
+                    <div class="alert alert-danger col-sm-11" role="alert">
+                        Sorry, wrong password!
+                    </div>
+                    <form>
+                        <div class="row mb-3">
+                            <label for="inputTitle" class="col-sm-2 col-form-label">Login</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="inputTitle" placeholder="Enter your login here">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-4">
+                                <div class="d-flex flex-column align-items-start">
+                                    <div class="col-lg-6">
+                                        <input type="password" class="form-control" id="inputPassword">
+                                    </div>
+                                </div>
+                                <a href="/askme/">
+                                    <button type="button" class="btn btn-outline-dark mt-2">Log in!</button>
+                                </a>
+                                <div class="mt-2">
+                                    <a href="/signup/">create new account</a>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+
+            <div class="col">
+                <section class="mb-3">
+                    <h2>Popular Tags</h2>
+                    <div>
+                        <span class="badge text-bg-primary">perl</span>
+                        <span class="badge text-bg-secondary">Python</span>
+                        <span class="badge text-bg-success">TechnoPark</span>
+                        <span class="badge text-bg-danger">MySQL</span>
+                        <span class="badge text-bg-warning">django</span>
+                        <span class="badge text-bg-info">Mail.ru</span>
+                        <span class="badge text-bg-light">Voloshin</span>
+                        <span class="badge text-bg-dark">Firefox</span>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Best members</h2>
+                    <div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="#">Tyler Durden</a></li>
+                            <li class="list-group-item"><a href="#">Mr Black</a></li>
+                            <li class="list-group-item"><a href="#">Mr White</a></li>
+                            <li class="list-group-item"><a href="#">Mr Yellow</a></li>
+                            <li class="list-group-item"><a href="#">Mr Purple</a></li>
+                        </ul>
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+
+
+    </main>
+<script src="../static/js/bootstrap.min.js"></script>
+</body>
+<footer class="mt-auto"style="display: flex;
+  justify-content: center;
+  padding: 5px;
+  background-color: #45a1ff;
+  color: #fff;">
+    <p>© 2024 Nikita Vopiiashin</p>
+</footer>
+</html>
