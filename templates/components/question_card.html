@@ -1,0 +1,29 @@
+{%load static%}
+
+<div class="card w-100">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-3">
+                <div class="border mb-2" style="height: 100px;">
+                    <img src="{% static 'img/card1.jpeg' %}" alt="Avatar"
+                            class="img-fluid" style="max-height: 95px; width: 100%;">
+                </div>
+                <input class="form-control" type="number" value="5" placeholder="Default input"
+                        aria-label="default input example">
+            </div>
+            <div class="col-9">
+                <h5 class="card-title">{{ question.title }}</h5>
+                <p class="card-text">{{ question.text }}!</p>
+                <div class="d-flex gap-5">
+                    <a href="{% url 'askme:question' question.id %}" class="card-link">Answer (3)</a>
+                    <div>
+                        Tags:
+                        <a href="{% url 'askme:tag' 'Wheels' %}" class="card-link">Wheels</a>
+                        <a href="{% url 'askme:tag' 'SomethingInteresting' %}" class="card-link">Something interesting</a>
+                        <a href="{% url 'askme:tag' 'text' %}" class="card-link">text</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

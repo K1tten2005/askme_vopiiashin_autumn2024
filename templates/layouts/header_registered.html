@@ -1,0 +1,12 @@
+{% load static %}
+
+<div class="d-flex gap-1">
+    <img src="{%static 'img/Avatar.png'%}" alt="Avatar" class="img-thumbnail" width="64">
+    <div>
+        <div>
+            dr pepper
+        </div>
+        <a href="/settings/">settings</a>
+        <a href="{% url 'askme:login' %}">log out</a>
+    </div>
+</div>

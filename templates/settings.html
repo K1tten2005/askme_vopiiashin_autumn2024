@@ -1,6 +1,10 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'layouts/base.html' %}
 {% load static %}
+{% block header %}
+    {% include "layouts/header_registered.html" %}
+{% endblock %}
+
+{% block content %}
 <div class="d-flex gap-3 align-items-center">
     <h1>Settings: Dr. Pepper</h1>
 </div>
@@ -38,7 +42,7 @@
                              class="img-thumbnail mb-2" style="max-height: 100px; width: 100px;">
                         <input type="file" class="form-control" id="UploadAvatar">
                     </div>
-                    <a href="/askme/">
+                    <a href="{% url 'askme:main_page'%}">
                         <button type="button" class="btn btn-outline-dark mt-2">Save</button>
                     </a>
                 </div>

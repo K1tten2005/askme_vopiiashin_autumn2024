@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Askme</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="d-flex w-100 justify-content-between align-items-center">
+                <a class="navbar-brand fs-2" href="{% url  'askme:main_page'%}">Ask Pupkin</a>
+
+
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <a href="{% url  'askme:ask'%}">
+                        <button class="btn btn-success" type="button">Ask!</button>
+                    </a>
+                </form>
+                <div class="account">
+                    {% block header %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-3">
+        <div class="row">
+            {% block content %}
+            {% endblock %}
+            <div class="col">
+                <section class="mb-3">
+                    <h2>Popular Tags</h2>
+                    <div>
+                        <a href="{% url 'askme:tag' 'perl' %}"><span class="badge text-bg-primary">perl</span></a>
+                        <a href="{% url 'askme:tag' 'python' %}"><span class="badge text-bg-secondary">Python</span></a>
+                        <a href="{% url 'askme:tag' 'TechnoPark' %}"><span class="badge text-bg-success">TechnoPark</span></a>
+                        <a href="{% url 'askme:tag' 'MySQL' %}"><span class="badge text-bg-danger">MySQL</span></a>
+                        <a href="{% url 'askme:tag' 'django' %}"><span class="badge text-bg-warning">django</span></a>
+                        <a href="{% url 'askme:tag' 'Mail.Ru' %}"><span class="badge text-bg-info">Mail.ru</span></a>
+                        <a href="{% url 'askme:tag' 'Voloshin' %}"><span class="badge text-bg-light">Voloshin</span></a>
+                        <a href="{% url 'askme:tag' 'Firefox' %}"><span class="badge text-bg-dark">Firefox</span></a>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Best members</h2>
+                    <div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="{% url 'askme:tag' 'TylerDurden' %}">Tyler Durden</a></li>
+                            <li class="list-group-item"><a href="{% url 'askme:tag' 'MrBlack' %}">Mr Black</a></li>
+                            <li class="list-group-item"><a href="{% url 'askme:tag' 'MrWhite' %}">Mr White</a></li>
+                            <li class="list-group-item"><a href="{% url 'askme:tag' 'MrYellow' %}">Mr Yellow</a></li>
+                            <li class="list-group-item"><a href="{% url 'askme:tag' 'MrPurple' %}">Mr Purple</a></li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+<script src="../static/js/bootstrap.bundle.js"></script>
+</body>
+<footer class="mt-auto" style="display: flex;
+  justify-content: center;
+  padding: 5px;
+  background-color: #45a1ff;
+  color: #fff;">
+    <p>© 2024 Nikita Vopiiashin</p>
+</footer>
+</html>
