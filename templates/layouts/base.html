@@ -36,14 +36,9 @@
                 <section class="mb-3">
                     <h2>Popular Tags</h2>
                     <div>
-                        <a href="{% url 'askme:tag' 'perl' %}"><span class="badge text-bg-primary">perl</span></a>
-                        <a href="{% url 'askme:tag' 'python' %}"><span class="badge text-bg-secondary">Python</span></a>
-                        <a href="{% url 'askme:tag' 'TechnoPark' %}"><span class="badge text-bg-success">TechnoPark</span></a>
-                        <a href="{% url 'askme:tag' 'MySQL' %}"><span class="badge text-bg-danger">MySQL</span></a>
-                        <a href="{% url 'askme:tag' 'django' %}"><span class="badge text-bg-warning">django</span></a>
-                        <a href="{% url 'askme:tag' 'Mail.Ru' %}"><span class="badge text-bg-info">Mail.ru</span></a>
-                        <a href="{% url 'askme:tag' 'Voloshin' %}"><span class="badge text-bg-light">Voloshin</span></a>
-                        <a href="{% url 'askme:tag' 'Firefox' %}"><span class="badge text-bg-dark">Firefox</span></a>
+                        {% for tag, type in popular_tags %}
+                            <a href="{% url 'askme:tag' tag.name %}"><span class="badge text-bg-{{type}}">{{ tag.name }}</span></a>
+                        {% endfor %}
                     </div>
                 </section>
 
@@ -51,11 +46,9 @@
                     <h2>Best members</h2>
                     <div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><a href="{% url 'askme:tag' 'TylerDurden' %}">Tyler Durden</a></li>
-                            <li class="list-group-item"><a href="{% url 'askme:tag' 'MrBlack' %}">Mr Black</a></li>
-                            <li class="list-group-item"><a href="{% url 'askme:tag' 'MrWhite' %}">Mr White</a></li>
-                            <li class="list-group-item"><a href="{% url 'askme:tag' 'MrYellow' %}">Mr Yellow</a></li>
-                            <li class="list-group-item"><a href="{% url 'askme:tag' 'MrPurple' %}">Mr Purple</a></li>
+                            {% for member in best_members %}
+                            <li class="list-group-item"><a href="{% url 'askme:tag' member.user.username %}">{{member.user.username}}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </section>

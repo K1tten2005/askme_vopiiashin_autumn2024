@@ -1,23 +1,10 @@
 from django.shortcuts import render
 from .utils import *
-
-
-QUESTIONS = [
-   {
-    'id': i,
-    'title': f'How do you ask questions? This is a question #{i}',
-    'text': f'Some text about question #{i}, explaining the question more thoroughly. More text, More text, More text, More text, More text,'
-   } for i in range(1, 70)
-]
-ANSWERS = [
-   {
-    'id': i,
-    'text': f'First of all, the number of my answer is {i}. So, as I was saying, my answer is very long and nice, my answer is very long and nice, my answer is very long and nice '
-   } for i in range(1, 10)
-]
+from .models import *
 
 
 def askme(request):
+    QUESTIONS = Question.objects.get_new()
     page = paginate(QUESTIONS, request)
     return render(request, 'index.html', 
                   context={
@@ -27,6 +14,7 @@ def askme(request):
                   })
 
 def hot(request):
+    QUESTIONS = Question.objects.get_hot()
     page = paginate(list(reversed(QUESTIONS)), request)
     return render(request, 'index.html', 
                   context={
@@ -39,15 +27,18 @@ def ask(request):
     return render(request, 'ask.html')
 
 def question(request, question_id):
+    question = Question.objects.get(id=question_id)
+    ANSWERS = Answer.objects.filter(question__id=question_id)
     page = paginate(ANSWERS, request)
     return render(request, 'question.html', 
                   context={
-                      'question': QUESTIONS[question_id-1],
+                      'question': question,
                       'page_obj': page,                      
                       'answers': page.object_list
                   })
 
 def tag(request, tag_name):
+    QUESTIONS = Question.objects.get_new().filter(tags__name=tag_name)
     page = paginate(QUESTIONS, request)
     return render(request, 'index.html', 
                   context={

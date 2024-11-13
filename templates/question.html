@@ -1,70 +1,70 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 {% block header %}
-    {% include "layouts/header_registered.html" %}
+    {% include "components/header_registered.html" %}
 {% endblock %}
 {% block content %}
-            <div class="col-9">
-                <div class="d-flex flex-column gap-3">
-                    <div class="question-body">
+    <div class="col-9">
+        <div class="d-flex flex-column gap-3">
+            <div class="question-body">
+                <div class="row">
+                    <div class="card-body">
                         <div class="row">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <div class="border mb-2" style="height: 100px" >
-                                            <img src="{%static 'img/card1.jpeg'%}" alt="Avatar"
-                                                 class="img-fluid" style="max-height: 95px; width:100%;">
-                                        </div>
-                                        <input class="form-control" type="number" value="5" placeholder="Default input"
-                                            aria-label="default input example">
+                            <div class="col-3">
+                                <div class="border mb-2" style="height: 100px" >
+                                    <img src="{%static 'img/card1.jpeg'%}" alt="Avatar"
+                                            class="img-fluid" style="max-height: 95px; width:100%;">
+                                </div>
+                                <input class="form-control" type="number" value="5" placeholder="Default input"
+                                    aria-label="default input example">
 
-                                    </div>
-                                    <div class="col-9">
+                            </div>
+                            <div class="col-9">
 
-                                        <h1 class="card-title">{{question.title}}</h1>
-                                        <p class="card-text">{{question.text}}</p>
+                                <h1 class="card-title">{{question.title}}</h1>
+                                <p class="card-text">{{question.text}}</p>
 
-                                        <div class="d-flex gap-5">
-                                            <div>
+                                <div class="d-flex gap-5">
+                                    <div>
 
-                                                Tags:
+                                        Tags:
 
-                                                <a href="{% url 'askme:tag' 'Wheels' %}" class="card-link">Wheels</a>
-                                                <a href="{% url 'askme:tag' 'SomethingInteresting' %}" class="card-link">Something interesting</a>
-                                                <a href="{% url 'askme:tag' 'text' %}" class="card-link">text</a>
-                                            </div>
-                                        </div>
+                                        {% for tag in question.tags.all %}
+                                            <a href="{% url 'askme:tag' tag.name %}" class="card-link">{{tag.name}}</a>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                    <hr class="my-2">
-
-                    {% for answer in answers %}
-                        {% include 'components/answer_card.html'%}
-                    {% endfor %}
-
-                    
-                    {% include "components/pagination.html" with page=page_obj %}
-
-                    <hr class="my-1">
-                    <form class="mb-3">
-                        <div class="row mb-3">
-                            <div class="col-sm-9">
-                                <label for="inputText"></label>
-                                <textarea type="text" class="form-control" id="inputText"
-                                          placeholder="Enter your answer here..." rows="6"></textarea>
-                            </div>
-                        </div>
-                        <a href="{% url 'askme:main_page' %}">
-                            <button type="button" class="btn btn-dark">Answer</button>
-                        </a>
-                    </form>
 
                 </div>
             </div>
+            <hr class="my-2">
+
+            {% for answer in answers %}
+                {% include 'components/answer_card.html'%}
+            {% endfor %}
+
+            
+            {% include "components/pagination.html" with page=page_obj %}
+
+            <hr class="my-1">
+            <form class="mb-3">
+                <div class="row mb-3">
+                    <div class="col-sm-9">
+                        <label for="inputText"></label>
+                        <textarea type="text" class="form-control" id="inputText"
+                                    placeholder="Enter your answer here..." rows="6"></textarea>
+                    </div>
+                </div>
+                <a href="{% url 'askme:main_page' %}">
+                    <button type="button" class="btn btn-dark">Answer</button>
+                </a>
+            </form>
+
+        </div>
+    </div>
 
         
 

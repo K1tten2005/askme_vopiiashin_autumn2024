@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'askme',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +63,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'askme.context_processors.popular_tags',
+                'askme.context_processors.best_members',
             ],
         },
     },
@@ -75,8 +78,12 @@ WSGI_APPLICATION = 'ask_vopiiashin.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'askme',
+        'USER': 'admin',
+        'PASSWORD': '1',
+        'HOST': 'localhost',
+        'PORT': 7782, 
     }
 }
 
