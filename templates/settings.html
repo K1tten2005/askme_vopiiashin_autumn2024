@@ -1,36 +1,36 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
-{% block header %}
-    {% include "components/header_registered.html" %}
-{% endblock %}
 
 {% block content %}
 <div class="d-flex gap-3 align-items-center">
-    <h1>Settings: Dr. Pepper</h1>
+    <h1>Settings: {{ user.username }}</h1>
 </div>
 
 <div class="col-9">
     <div class="d-flex flex-column gap-3">
 
-        <form>
+        <form action="{% url 'askme:settings' %}" method="POST" class="info-input" enctype="multipart/form-data">
+            {% csrf_token %}
+
             <div class="row mb-3">
-                <label for="inputLogin" class="col-sm-2 col-form-label">Login</label>
+                <label for="inputLogin" class="col-sm-2 col-form-label">Username</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="inputLogin" value="dr_pepper">
+                    <input type="text" class="form-control" name="username" id="inputLogin" placeholder="Enter new username"
+                    maxlength="30" value="{{ form.username.value|default:'' }}">
+                    {% for error in form.username.errors %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% endfor %}
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-4">
-                  <input type="text" class="form-control" id="inputEmail" value="dr.pepper@mail.ru">
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label for="inputNickname" class="col-sm-2 col-form-label">Nickname</label>
-                <div class="col-sm-4">
-                  <input type="text" class="form-control" id="inputNickname" value="Dr. Pepper">
+                    <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Enter new email"
+                    maxlength="320" value="{{ form.email.value|default:'' }}">
+                    {% for error in form.email.errors %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% endfor %}
                 </div>
             </div>
 
@@ -38,20 +38,32 @@
                 <label for="UploadAvatar" class="col-sm-2 col-form-label">Upload avatar</label>
                 <div class="col-sm-4">
                     <div class="d-flex flex-column align-items-start">
-                        <img src="{% static 'img/Avatar.png' %}" alt="Avatar"
+                        <img src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% endif %}" alt="Avatar"
                              class="img-thumbnail mb-2" style="max-height: 100px; width: 100px;">
-                        <input type="file" class="form-control" id="UploadAvatar">
+                        <input type="file" class="form-control" name="avatar" id="UploadAvatar">
+                        {% for error in form.avatar.errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
                     </div>
-                    <a href="{% url 'askme:main_page'%}">
-                        <button type="button" class="btn btn-outline-dark mt-2">Save</button>
-                    </a>
+                    <button type="submit" class="btn btn-outline-dark mt-2">Save</button>
                 </div>
             </div>
         </form>
-
-
     </div>
+    <script>
+        document.getElementById('UploadAvatar').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('UploadAvatar').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </div>
+    
 
 {% endblock %}
 

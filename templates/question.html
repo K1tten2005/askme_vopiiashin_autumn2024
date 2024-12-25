@@ -1,8 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
-{% block header %}
-    {% include "components/header_registered.html" %}
-{% endblock %}
+
 {% block content %}
     <div class="col-9">
         <div class="d-flex flex-column gap-3">
@@ -15,7 +13,7 @@
                                     <img src="{%static 'img/card1.jpeg'%}" alt="Avatar"
                                             class="img-fluid" style="max-height: 95px; width:100%;">
                                 </div>
-                                <input class="form-control" type="number" value="5" placeholder="Default input"
+                                <input class="form-control" type="number" value={{question.get_rating}} min="0"
                                     aria-label="default input example">
 
                             </div>
@@ -29,9 +27,13 @@
 
                                         Tags:
 
-                                        {% for tag in question.tags.all %}
-                                            <a href="{% url 'askme:tag' tag.name %}" class="card-link">{{tag.name}}</a>
-                                        {% endfor %}
+                                        {% if question.tags.exists %}
+                                            {% for tag in question.tags.all %}
+                                                {% if tag.name %}
+                                                    <a href="{% url 'askme:tag' tag.name %}">{{ tag.name }}</a>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -50,17 +52,16 @@
             {% include "components/pagination.html" with page=page_obj %}
 
             <hr class="my-1">
-            <form class="mb-3">
+            <form class="mb-3" method="POST" action="{% url 'askme:add_answer' question.id %}">
+                {% csrf_token %}
                 <div class="row mb-3">
                     <div class="col-sm-9">
                         <label for="inputText"></label>
-                        <textarea type="text" class="form-control" id="inputText"
+                        <textarea type="text" class="form-control" id="inputText" name="text"
                                     placeholder="Enter your answer here..." rows="6"></textarea>
                     </div>
                 </div>
-                <a href="{% url 'askme:main_page' %}">
-                    <button type="button" class="btn btn-dark">Answer</button>
-                </a>
+                <button type="submit" class="btn btn-dark">Answer</button>
             </form>
 
         </div>

@@ -1,7 +1,4 @@
 {% extends 'layouts/base.html' %}
-{% block header %}
-    {% include "components/header_registered.html" %}
-{% endblock %}
 {% block content %}
     <div class="d-flex gap-3 align-items-center">
         <h1>New Question</h1>
@@ -9,31 +6,32 @@
 
     <div class="col-9">
         <div class="d-flex flex-column gap-3">
-            <div class="alert alert-danger col-sm-11" role="alert">
-                Sorry, "Title" field is empty!
-            </div>
-            <form>
+            <form method="POST" enctype="multipart/form-data" class="info-input">
+                {% csrf_token %}
                 <div class="row mb-3">
                     <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputTitle" value="How to build a bike?">
+                        <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Enter title here..." 
+                        maxlength="120" value="{{ form.title.value|default:'' }}">
                     </div>
                 </div>
+
                 <div class="row mb-3">
                     <label for="inputText" class="col-sm-2 col-form-label">Text</label>
                     <div class="col-sm-9">
-                        <textarea type="text" class="form-control" id="inputText" rows="10"></textarea>
+                        <textarea type="text" class="form-control" id="inputText" name="text" rows="10"
+                        placeholder="Enter your text here...">{{ form.text.value|default:'' }}</textarea>
                     </div>
                 </div>
+
                 <div class="row mb-3">
                     <label for="inputTags" class="col-sm-2 col-form-label">Tags</label>
                     <div class="col-sm-4">
                         <div class="d-flex flex-column align-items-start">
-                            <input type="text" class="form-control" id="inputTags">
+                            <input type="text" class="form-control" id="inputTags" name="tags"
+                            placeholder="Enter tags here..." maxlength="120" value="{{ form.tags.value|default:''  }}">
                         </div>
-                        <a href="{% url 'askme:main_page'%}">
-                            <button type="button" class="btn btn-outline-dark mt-2">ASK!</button>
-                        </a>
+                        <button type="submit" class="btn btn-outline-dark mt-2">ASK!</button>
                     </div>
                 </div>
             </form>

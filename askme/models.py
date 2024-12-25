@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum, F, Count, Q
+from django.urls import reverse
 
 
 class TagManager(models.Manager):  
@@ -36,6 +37,9 @@ class Question(models.Model):
     tags = models.ManyToManyField(Tag)
 
     objects = QuestionManager()
+
+    def get_absolute_url(self):
+        return reverse('askme:question', kwargs={'question_id': self.id})
 
     def get_rating(self):
         upvotes = QuestionLike.objects.filter(question=self, is_upvote=True).count()

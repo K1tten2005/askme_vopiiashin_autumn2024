@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Askme</title>
-    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 </head>
 <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -21,8 +21,28 @@
                     </a>
                 </form>
                 <div class="account">
-                    {% block header %}
-                    {% endblock %}
+                    {% if request.user.is_authenticated %}
+                <div class="account-image">
+                    <img src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% endif %}" alt="Image"
+                    style="width: 40px; height: 40px">
+                </div>
+                <div class="account-content">
+                    <div class="account-name">{{ user.username }}</div>
+                    <div class="account-actions">
+                        <a href="{% url 'askme:settings' %}">Settings</a>
+                        <a href="{% url 'askme:logout' %}">Log out</a>
+                    </div>
+                </div>                
+            {% else %}
+                <div class="account-actions">
+                    {% if request.path != '/signup/' %}
+                        <a href="{% url 'askme:login' %}?next={{ request.path }}">log in</a>
+                    {% else %}
+                        <a href="{% url 'askme:login' %}">log in</a>
+                    {% endif %}
+                    <a href="{% url 'askme:signup' %}">register</a>
+                </div>
+            {% endif %}
                 </div>
             </div>
         </div>
