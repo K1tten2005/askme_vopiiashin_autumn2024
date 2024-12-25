@@ -6,15 +6,26 @@
         <div class="d-flex flex-column gap-3">
             <div class="question-body">
                 <div class="row">
-                    <div class="card-body">
+                    <div class="card-body card" data-question-id="{{question.id}}">
                         <div class="row">
                             <div class="col-3">
                                 <div class="border mb-2" style="height: 100px" >
                                     <img src="{%static 'img/card1.jpeg'%}" alt="Avatar"
                                             class="img-fluid" style="max-height: 95px; width:100%;">
                                 </div>
-                                <input class="form-control" type="number" value={{question.get_rating}} min="0"
-                                    aria-label="default input example">
+                                <div class="form-group">
+                                    {% if request.user.is_authenticated %}
+                                        <button class="btn {% if question.user_vote == True %}btn-like active{% else %}btn-like{% endif %}">
+                                            👍
+                                        </button>
+                                    {% endif %}
+                                        <span class="like-counter">{{ question.get_rating }}</span>
+                                    {% if request.user.is_authenticated %}
+                                        <button class="btn {% if question.user_vote == False %}btn-dislike active{% else %}btn-dislike{% endif %}">
+                                            👎
+                                        </button>
+                                    {% endif %}
+                                </div>
 
                             </div>
                             <div class="col-9">
@@ -67,6 +78,6 @@
         </div>
     </div>
 
-        
+    <script src="{% static 'js/app.js' %}"></script>        
 
 {% endblock %}

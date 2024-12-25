@@ -1,24 +1,36 @@
 {% load static %}
 
 <div class="card w-100" style="width: 18rem;">
-    <div class="card-body">
+    <div class="card-body card-answer" data-answer-id="{{answer.id}}">
         <div class="row">
             <div class="col-3">
                 <div class="border mb-2" style="height: 100px" >
                     <img src="{%static 'img/avatar1.jpg'%}" alt="Avatar"
                         class="img-fluid" style="max-height: 95px; width:100%;">
                 </div>
-                <input class="form-control" type="number" value="{{answer.get_rating}}" placeholder="Default input"
-                    aria-label="default input example">
+                <div class="form-group">
+                    {% if request.user.is_authenticated %}
+                        <button class="btn {% if answer.user_vote == True %}btn-like active{% else %}btn-like{% endif %}">
+                            👍
+                        </button>
+                    {% endif %}
+                    <span class="like-counter">{{ answer.get_rating }}</span>
+                    {% if request.user.is_authenticated %}
+                        <button class="btn {% if answer.user_vote == False %}btn-dislike active{% else %}btn-dislike{% endif %}">
+                            👎
+                        </button>
+                    {% endif %}
+                </div>
 
-            </div>
+                </div>
             <div class="col-9">
 
                 <p class="card-text">{{answer.text}}</p>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
                         <label class="form-check-label" for="flexCheckDefault1">
+                        <input type="checkbox" id="flexCheckDefault1" class="form-check-input" {% if answer.correctness %}checked{% endif %}
+                        {% if question.author != request.user %} disabled {% endif %}>
                             Correct!
                         </label>
                     </div>

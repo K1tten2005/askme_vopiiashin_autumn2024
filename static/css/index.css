@@ -143,3 +143,24 @@ h1, h2, h3, h4, h5, h6 {
     gap: 5px;
 }
 
+
+
+.btn-like {
+    background-color: transparent;
+    color: #28a745;
+    border-color: #28a745;
+}
+.btn-like.active {
+    background-color: #28a745;
+    color: white;
+}
+.btn-dislike {
+    background-color: transparent;
+    color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-dislike.active {
+    background-color: #dc3545;
+    color: white;
+}
+
