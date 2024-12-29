@@ -21,7 +21,7 @@
                     <div class="row mb-3">
                         <label for="inputLogin" class="col-sm-2 col-form-label">Username</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" id="inputLogin" placeholder="Enter your login here"
+                            <input type="text" class="form-control" id="inputLogin" name="username" placeholder="Enter your login here"
                              maxlength="30" value="{{ form.username.value|default:'' }}">
                             {% for error in form.username.errors %}
                                 <div class="error-message-small">{{ error }}</div>
@@ -32,7 +32,7 @@
                     <div class="row mb-3">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="Enter your email here" 
+                            <input type="text" class="form-control" id="inputEmail" name="email" placeholder="Enter your email here" 
                             maxlength="320" value="{{ form.email.value|default:'' }}">
                             {% for error in form.email.errors %}
                                 <div class="error-message-small">{{ error }}</div>
@@ -43,7 +43,7 @@
                     <div class="row mb-3">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-3">
-                            <input type="password" class="form-control" id="inputPassword"
+                            <input type="password" class="form-control" name="password" id="inputPassword"
                             placeholder="Enter password" maxlength="30">
                             {% for error in form.password.errors %}
                                 <div class="error-message-small">{{ error }}</div>
@@ -54,7 +54,7 @@
                     <div class="row mb-3">
                         <label for="inputRepeatPassword" class="col-sm-2 col-form-label">Repeat password</label>
                         <div class="col-sm-3">
-                            <input type="password" class="form-control" id="inputRepeatPassword"
+                            <input type="password" class="form-control" name="password_confirmation" id="inputRepeatPassword"
                             placeholder="Confirm password" maxlength="30">
                             {% for error in form.password_confirmation.errors %}
                                 <div class="error-message-small">{{ error }}</div>

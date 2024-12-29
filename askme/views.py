@@ -219,10 +219,10 @@ def signup(request):
             user = auth.authenticate(request, **form.cleaned_data)
             if user is not None:
                 auth.login(request, user)
-                return redirect(reverse('index'))
+                return redirect(reverse('askme:main_page'))
     else:
         form = RegisterForm()
-        return render(request, 'signup.html', {'form': form})
+    return render(request, 'signup.html', {'form': form})
     
 def logout(request):
     auth.logout(request)
